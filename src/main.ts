@@ -62,8 +62,9 @@ const bellMat = new THREE.ShaderMaterial({
 
     uniforms: {
         uTime: { value: 0},
-        uPulseAmp: { value: 0.12 },
-        uPulseFreq: { value: 1.4 },
+        uPulseAmp: { value: 0.08 },
+        uPulseFreq: { value: 2.4 },
+        uSplit: { value: 0.275 },
         uColorTop: { value: new THREE.Color(0x88aaff) },
         uColorBottom: { value: new THREE.Color(0xc8a0ff) },
         uRimPower: {value: 2.0}
