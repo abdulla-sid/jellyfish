@@ -17,8 +17,10 @@ pnpm-debug.log*
 
 # Personal learning notes (kept out of source control by design)
 three-docs/
+math-docs/
 decisions/
 design/
+archive/
 
 # Local AI assistant rules — not shared between collaborators
 .cursor/
