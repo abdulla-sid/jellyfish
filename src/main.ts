@@ -28,12 +28,10 @@ function makeBellProfile(N: number): THREE.Vector2[] {
   const R_max  = 0.800;   // max radius (at the equator)
   const Y_apex = 1.10;    // y at the top of the bell
   const Y_eq   = 0.550;   // y at the widest point
-  const Y_rim  = 0.475;   // y at the innermost rim point
-  const R_rim  = 0.750;   // r at the innermost rim point
+  const Y_rim  = 0.400;   // y at the rim edge
 
   const H_top = Y_apex - Y_eq;
   const θ_max = Math.acos((Y_rim - Y_eq) / H_top);
-  const extraCurl = R_max * Math.sin(θ_max) - R_rim;
 
   const pts: THREE.Vector2[] = [];
   for (let i = 0; i < N; i++) {
@@ -41,10 +39,7 @@ function makeBellProfile(N: number): THREE.Vector2[] {
     const θ = t * θ_max;
 
     const y = Y_eq + H_top * Math.cos(θ);
-
-    const u = Math.max(0, (θ - Math.PI / 2) / (θ_max - Math.PI / 2));
-    const curl = u * u * (3 - 2 * u);
-    const r = R_max * Math.sin(θ) - curl * extraCurl;
+    const r = R_max * Math.sin(θ);
 
     pts.push(new THREE.Vector2(r, y));
   }
@@ -62,9 +57,9 @@ const bellMat = new THREE.ShaderMaterial({
 
     uniforms: {
         uTime: { value: 0},
-        uPulseAmp: { value: 0.08 },
+        uPulseAmp: { value: 0.12 },
         uPulseFreq: { value: 2.4 },
-        uSplit: { value: 0.275 },
+        uSplit: { value: 0.20 },
         uColorTop: { value: new THREE.Color(0x88aaff) },
         uColorBottom: { value: new THREE.Color(0xc8a0ff) },
         uRimPower: {value: 2.0}

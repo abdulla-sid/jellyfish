@@ -10,7 +10,8 @@ varying vec3  vViewDir;
 varying float vRimFactor;
 
 void main() {
-  float rimWeight = smoothstep(0.9, 0.5, position.y);
+  float rimWeight       = smoothstep(0.9, 0.5, position.y);
+
   float TWO_PI = 6.28318530718;
   float PI     = 3.14159265359;
 
@@ -23,11 +24,12 @@ void main() {
       theta = PI + ((phase - uSplit) / (1.0 - uSplit)) * PI;
   }
 
-  float pulse = (1.0 - cos(theta)) * uPulseAmp - 0.20;
-  vec3  displaced = position + normal * pulse * rimWeight;
+  float pulse = (1.0 - cos(theta)) * uPulseAmp - 0.15;
+  vec3  localNormal = normalize(normal);
+  vec3  displaced = position + localNormal * pulse * rimWeight;
 
   vRimFactor = rimWeight;
-  vNormal    = (modelMatrix * vec4(normal,    0.0)).xyz;
+  vNormal    = normalize(normalMatrix * localNormal);
   vViewDir   = cameraPosition - (modelMatrix * vec4(displaced, 1.0)).xyz;
 
   gl_Position = projectionMatrix * modelViewMatrix * vec4(displaced, 1.0);
