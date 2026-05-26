@@ -10,7 +10,13 @@ varying vec3  vViewDir;
 varying float vRimFactor;
 
 void main() {
-  float rimWeight       = smoothstep(0.9, 0.5, position.y);
+  float rimWeight;
+  if (position.y > 0.45) {
+    rimWeight = 1.0 - smoothstep(0.45, 0.9, position.y);
+  } else {
+    rimWeight = pow(abs(4.0 * (position.y - 0.45)), 2.0) + 1.0;
+  }
+
 
   float TWO_PI = 6.28318530718;
   float PI     = 3.14159265359;
@@ -28,7 +34,7 @@ void main() {
   vec3  localNormal = normalize(normal);
   vec3  displaced = position + localNormal * pulse * rimWeight;
 
-  vRimFactor = rimWeight;
+  vRimFactor = clamp(rimWeight, 0.0, 1.0);
   vNormal    = normalize(normalMatrix * localNormal);
   vViewDir   = cameraPosition - (modelMatrix * vec4(displaced, 1.0)).xyz;
 
