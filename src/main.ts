@@ -28,7 +28,7 @@ function makeBellProfile(N: number): THREE.Vector2[] {
   const R_max  = 0.800;   // max radius (at the equator)
   const Y_apex = 1.10;    // y at the top of the bell
   const Y_eq   = 0.550;   // y at the widest point
-  const Y_rim  = 0.400;   // y at the rim edge
+  const Y_rim  = 0.350;   // y at the rim edge
 
   const H_top = Y_apex - Y_eq;
   const θ_max = Math.acos((Y_rim - Y_eq) / H_top);
