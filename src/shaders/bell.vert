@@ -14,7 +14,7 @@ void main() {
   if (position.y > 0.45) {
     rimWeight = 1.0 - smoothstep(0.45, 0.9, position.y);
   } else {
-    rimWeight = pow(abs(4.0 * (position.y - 0.5)), 2.0) + 1.0;
+    rimWeight = pow(abs(4.0 * (position.y - 0.45)), 2.0) + 1.0;
   }
 
 
@@ -30,7 +30,7 @@ void main() {
       theta = PI + ((phase - uSplit) / (1.0 - uSplit)) * PI;
   }
 
-  float pulse = (1.0 - cos(theta)) * uPulseAmp - 0.1;
+  float pulse = (1.0 - cos(theta)) * uPulseAmp - 0.15;
   vec3  localNormal = normalize(normal);
   vec3  displaced = position + localNormal * pulse * rimWeight;
 
